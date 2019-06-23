@@ -276,11 +276,9 @@
   cursor: pointer;
 }
 
-/* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 .pdfViewer {
   height: 100%;
 }
-/* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 .pdfViewer .canvasWrapper {
   overflow: hidden;
 }
@@ -317,14 +315,11 @@
   margin-left: 3.5px;
   margin-right: 3.5px;
   text-align: center;
-
 }
 
 .pdfViewer.scrollHorizontal, .spread {
   white-space: nowrap;
-  /* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
   position: absolute;
-  /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 }
 
 .pdfViewer.removePageBorders,
@@ -349,8 +344,6 @@
   margin-left: -3.5px;
   margin-right: -3.5px;
 }
-
-/* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 .spread .page {
   position: relative !important;
   -webkit-transform: none !important;
@@ -358,7 +351,6 @@
   left: auto !important;
   top: auto !important;
 }
-/* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 
 .pdfViewer.removePageBorders .spread .page,
 .pdfViewer.removePageBorders.scrollHorizontal .page,
@@ -391,18 +383,12 @@
   margin-right: 0;
 }
 
-
-
 .pdfPresentationMode .pdfViewer .page,
 .pdfPresentationMode .pdfViewer .spread {
   display: block;
-  /* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
   position: relative !important;
   top: auto !important;
   left: auto !important;
-  /*left: 50% !important;
-  transform: translateX(-50%) !important; */
-  /* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
 }
 
 .pdfPresentationMode .pdfViewer .page,
@@ -2037,14 +2023,12 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
 #PDFBug table {
   font-size: 10px;
 }
-/* -----------------tanglinhai 改造page布局成absolute,改善性能 start------------------ */
 #viewer{
   position: relative;
 }
 #viewer .page{
   position: absolute;
 }
-/* -----------------tanglinhai 改造page布局成absolute,改善性能 end------------------ */
 #viewer.textLayer-visible .textLayer {
   opacity: 1.0;
 }
@@ -2073,8 +2057,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   background-color: rgba(255,255,255, .6);
   color: black;
 }
-
-/* -----------------------------tanglinhai 修改大文件加载策略 start----------------------------- */
 #viewerLoading{
   position: absolute;
   top: 32px;
@@ -2108,8 +2090,6 @@ html[dir='rtl'] #documentPropertiesOverlay .row > * {
   display: block;
   margin: auto;
 }
-/* -----------------------------tanglinhai 修改大文件加载策略 end----------------------------- */
-
 
 .grab-to-pan-grab {
   cursor: url("images/grab.cur"), move !important;
