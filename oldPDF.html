@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <title>new PDF</title>
+    <!-- <link rel="stylesheet" href="css/jquery-ui-1.10.4.min.css"> -->
+    <style type="text/css">
+        body {
+            background-color: #F3F3F3;
+        }
+
+        .box {
+            width: 1000px;
+            height: 500px;
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background-color: #FFF;
+            border: 1px solid #CCCCCC;
+            -webkit-box-shadow: 10px 10px 25px #ccc;
+            -moz-box-shadow: 10px 10px 25px #ccc;
+            box-shadow: 10px 10px 25px #ccc;
+        }
+
+        .coor {
+            width: 50px;
+            height: 50px;
+            line-height: 50px;
+            color: #fff;
+            text-align: center;
+            overflow: hidden;
+            cursor: se-resize;
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            background-color: #09C;
+            z-index: 1000;
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            display: block;
+            margin: auto;
+        }
+        .floating_div {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 10;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+		<div class="box">
+			<iframe id="iframe" src="https://tanglinhai.github.io/repo/test/pdfsrc/web/viewer.html?file=../../../docs/test.pdf#toolbar=0&view=FitH&page=1"></iframe>
+        <div class="coor">drag</div>
+        <div class="floating_div" id="floating_div"></div>
+		</div>
+    <script type="text/javascript" src="js/jquery-2.2.3.min.js"></script>
+    <!-- <script type="text/javascript" src="js/jquery-ui-1.10.4.min.js"></script> -->
+    <script type="text/javascript">
+
+    $(function() {
+        $(document).mousemove(function(e) {
+            if (!!this.move) {
+                var posix = !document.move_target ? { 'x': 0, 'y': 0 } : document.move_target.posix,
+                    callback = document.call_down;
+                callback.call(this, e, posix);
+            }
+        }).mouseup(function(e) {
+            $('#floating_div').hide();
+            if (!!this.move) {
+                var callback = document.call_up || function() {};
+                callback.call(this, e);
+                $.extend(this, {
+                    'move': false,
+                    'move_target': null,
+                    'call_down': false,
+                    'call_up': false
+                });
+            }
+        });
+
+        var $box = $('.box').mousedown(function(e) {
+            var offset = $(this).offset();
+
+            this.posix = { 'x': e.pageX - offset.left, 'y': e.pageY - offset.top };
+            //$.extend(document, { 'move': false, 'move_target': this });
+        }).on('mousedown', '.coor', function(e) {
+            $('#floating_div').show();
+            var fBox = $(this).parent();
+
+            var posix = {
+                'w': fBox.width(),
+                'h': fBox.height(),
+                'x': e.pageX,
+                'y': e.pageY
+            };
+
+            $.extend(document, {
+                'move': true,
+                'call_down': function(e) {
+                    fBox.css({
+                        'width': Math.max(500, e.pageX - posix.x + posix.w),
+                        'height': Math.max(200, e.pageY - posix.y + posix.h)
+                    });
+                }
+            });
+            return false;
+        });
+    });
+    </script>
+</body>
+
+</html>
